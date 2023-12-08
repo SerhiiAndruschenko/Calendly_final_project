@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "name": "Test User",
+      "email": "test@gmail.com",
+      "password": "Test1234567891",
+      "id": "4",
+      "workingHoursStart": "09:00",
+      "workingHoursEnd": "20:00"
+    },
+    {
+      "name": "Robert Bergnaum",
+      "email": "Murray.Hirthe77@yahoo.com",
+      "password": "qoK1u3w8tSmkD4b",
+      "id": "5",
+      "workingHoursStart": "10:00",
+      "workingHoursEnd": "20:00"
+    },
+    {
+      "name": "Lora Balistreri V",
+      "email": "Evalyn.OKon71@hotmail.com",
+      "password": "JCkBWWWyPX8NwOe",
+      "id": "6",
+      "workingHoursStart": "08:00",
+      "workingHoursEnd": "18:00"
+    },
+    {
+      "name": "Emilio Champlin",
+      "email": "Jayme_Ondricka63@gmail.com",
+      "password": "g4pztmuDN52ZpTM",
+      "id": "7",
+      "workingHoursStart": "09:00",
+      "workingHoursEnd": "19:00"
+    },
+    {
+      "name": "June Bernhard",
+      "email": "Durward.Kris@gmail.com",
+      "password": "UQ15GwfUIy7DMOr",
+      "id": "8",
+      "workingHoursStart": "08:00",
+      "workingHoursEnd": "18:00"
+    },
+    {
+      "name": "Jessie Bernier",
+      "email": "Cristopher91@gmail.com",
+      "password": "HH4zbRWR6Ap54L4",
+      "id": "9",
+      "workingHoursStart": "09:00",
+      "workingHoursEnd": "19:00"
+    }
+  ]
+}

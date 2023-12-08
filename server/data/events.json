@@ -1,0 +1,153 @@
+{
+  "events": [
+    {
+      "description": "ascascascsacqw 1234",
+      "eventName": "test event",
+      "participants": [
+        {
+          "id": "4",
+          "name": "Test User",
+          "email": "test@gmail.com",
+          "status": "accepted",
+          "role": "owner",
+          "workingHoursStart": "09:00",
+          "workingHoursEnd": "20:00"
+        },
+        {
+          "id": "5",
+          "name": "Robert Bergnaum",
+          "email": "Murray.Hirthe77@yahoo.com",
+          "status": "pending",
+          "role": "member",
+          "workingHoursStart": "10:00",
+          "workingHoursEnd": "20:00"
+        }
+      ],
+      "id": "1",
+      "date": "12/07/2023",
+      "time": "14:00",
+      "individualCall": true
+    },
+    {
+      "description": "qwcqcwqwcqwxqwx",
+      "eventName": "test event 2",
+      "participants": [
+        {
+          "id": "4",
+          "name": "Test User",
+          "email": "test@gmail.com",
+          "status": "accepted",
+          "role": "owner",
+          "workingHoursStart": "10:00",
+          "workingHoursEnd": "2023-12-03T18:03:00.000Z"
+        },
+        {
+          "id": "5",
+          "name": "Robert Bergnaum",
+          "email": "Murray.Hirthe77@yahoo.com",
+          "status": "cancelled",
+          "role": "member",
+          "workingHoursStart": "10:00",
+          "workingHoursEnd": "20:00"
+        },
+        {
+          "id": "6",
+          "name": "Lora Balistreri V",
+          "email": "Evalyn.OKon71@hotmail.com",
+          "status": "pending",
+          "role": "member",
+          "workingHoursStart": "08:00",
+          "workingHoursEnd": "18:00"
+        }
+      ],
+      "id": "2",
+      "date": "12/08/2023",
+      "time": "16:00",
+      "individualCall": false
+    },
+    {
+      "description": "caascascascascasc ascasc",
+      "eventName": "test event 3",
+      "participants": [
+        {
+          "id": "6",
+          "name": "Lora Balistreri V",
+          "email": "Evalyn.OKon71@hotmail.com",
+          "status": "pending",
+          "role": "member",
+          "workingHoursStart": "08:00",
+          "workingHoursEnd": "18:00"
+        },
+        {
+          "id": "8",
+          "name": "June Bernhard",
+          "email": "Durward.Kris@gmail.com",
+          "status": "pending",
+          "role": "member",
+          "workingHoursStart": "08:00",
+          "workingHoursEnd": "18:00"
+        }
+      ],
+      "id": "3",
+      "date": "12/11/2023",
+      "time": "21:00",
+      "individualCall": false
+    },
+    {
+      "description": "ascascascascasc 23",
+      "eventName": "test event 5",
+      "participants": [
+        {
+          "id": "4",
+          "name": "Test User",
+          "email": "test@gmail.com",
+          "status": "cancelled",
+          "role": "owner",
+          "workingHoursStart": "09:00",
+          "workingHoursEnd": "20:00"
+        },
+        {
+          "id": "6",
+          "name": "Lora Balistreri V",
+          "email": "Evalyn.OKon71@hotmail.com",
+          "status": "pending",
+          "role": "member",
+          "workingHoursStart": "08:00",
+          "workingHoursEnd": "18:00"
+        }
+      ],
+      "id": "4",
+      "date": "12/07/2023",
+      "time": "18:00",
+      "individualCall": true
+    },
+    {
+      "id": "5",
+      "eventName": "test event server",
+      "description": "ascascascascasc",
+      "date": "12/08/2023",
+      "time": "15:00",
+      "individualCall": true,
+      "participants": [
+        {
+          "id": "4",
+          "name": "Test User",
+          "email": "test@gmail.com",
+          "status": "accepted",
+          "role": "owner",
+          "workingHoursStart": "09:00",
+          "workingHoursEnd": "20:00"
+        },
+        {
+          "id": "5",
+          "name": "Robert Bergnaum",
+          "email": "Murray.Hirthe77@yahoo.com",
+          "status": "pending",
+          "role": "member",
+          "workingHoursStart": "10:00",
+          "workingHoursEnd": "20:00"
+        }
+      ]
+    }
+  ]
+}

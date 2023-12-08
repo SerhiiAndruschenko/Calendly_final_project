@@ -1,0 +1,187 @@
+.App {
+  margin: 50px 0;
+}
+body {
+  background-color: #ddd;
+}
+h2 {
+  text-align: center;
+}
+form > div {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+form > div:last-child {
+  margin: 0;
+}
+
+.user-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.MuiToolbar-root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.MuiToolbar-root button {
+  padding: 0;
+  color: #fff;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: #fff;
+  padding: 30px 20px;
+}
+.modal > button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.MuiList-root {
+  margin: 50px 0;
+  width: 100%;
+}
+.MuiList-root li {
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+.MuiList-root li:last-child {
+  margin: 0;
+}
+.user-inner .MuiList-root {
+  margin: 50px 0 0 0;
+  width: calc(100% - 48px);
+}
+
+.user-inner > .MuiAlert-root {
+  margin: 50px 0 0 0;
+}
+
+#inviteForm {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+#inviteForm .MuiFormControl-root {
+  margin: 0;
+}
+
+#inviteForm p#email-helper-text {
+  position: absolute;
+  top: 100%;
+}
+
+span.pending {
+  padding: 5px 10px;
+  background: #ddd;
+  border-radius: 15px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.users {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 0 0;
+}
+
+span.accepted {
+  padding: 5px 10px;
+  background: green;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 12px;
+}
+
+span.cancel,
+span.cancelled {
+  padding: 5px 10px;
+  background: red;
+  border-radius: 15px;
+  color: #fff;
+  font-size: 12px;
+}
+
+.MuiListItem-root.cancel,
+.MuiListItem-root.cancelled {
+  opacity: 0.5;
+}
+.hours-row {
+  display: flex;
+  gap: 30px;
+}
+
+.modal .css-4jnixx-MuiStack-root > .MuiTextField-root {
+  min-width: unset;
+}
+
+.user-inner .MuiList-root.cancelledEvents {
+  margin-top: 0;
+  padding-top: 30px;
+  border-top: 1px solid #1976d2;
+}
+
+.MuiPickersLayout-root .MuiList-root {
+  min-width: 90px;
+}
+
+.preloaderWrap {
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  .modal {
+    max-width: 85%;
+    padding: 20px 10px;
+  }
+  header h2 {
+    font-size: 18px;
+  }
+  header .MuiToolbar-root button {
+    font-size: 12px;
+  }
+  .users {
+    flex-wrap: wrap;
+  }
+  .users > span:first-child {
+    width: 100%;
+  }
+  .MuiList-root li .MuiListItemSecondaryAction-root {
+    top: 5px;
+    transform: translate(0);
+  }
+  .MuiPaper-root:not(.MuiAppBar-root) {
+    max-width: 80% !important;
+  }
+  .user-inner .MuiList-root {
+    margin: 30px 0 0 0;
+    width: calc(100% - 32px);
+  }
+}

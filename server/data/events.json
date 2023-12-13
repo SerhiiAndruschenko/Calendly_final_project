@@ -1,7 +1,7 @@
 {
   "events": [
     {
-      "description": "ascascascsacqw 1234",
+      "description": "ascascascsacqw 12345",
       "eventName": "test event",
       "participants": [
         {
@@ -10,8 +10,8 @@
           "email": "test@gmail.com",
           "status": "accepted",
           "role": "owner",
-          "workingHoursStart": "09:00",
-          "workingHoursEnd": "20:00"
+          "workingHoursStart": "10:00",
+          "workingHoursEnd": "19:00"
         },
         {
           "id": "5",
@@ -23,7 +23,7 @@
           "workingHoursEnd": "20:00"
         }
       ],
-      "id": "1",
+      "id": "7",
       "date": "12/07/2023",
       "time": "14:00",
       "individualCall": true
@@ -32,15 +32,6 @@
       "description": "qwcqcwqwcqwxqwx",
       "eventName": "test event 2",
       "participants": [
-        {
-          "id": "4",
-          "name": "Test User",
-          "email": "test@gmail.com",
-          "status": "accepted",
-          "role": "owner",
-          "workingHoursStart": "10:00",
-          "workingHoursEnd": "2023-12-03T18:03:00.000Z"
-        },
         {
           "id": "5",
           "name": "Robert Bergnaum",
@@ -146,6 +137,34 @@
           "role": "member",
           "workingHoursStart": "10:00",
           "workingHoursEnd": "20:00"
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "eventName": "test event 123",
+      "description": "ascascasxasxasx",
+      "date": "12/21/2023",
+      "time": "17:00",
+      "individualCall": true,
+      "participants": [
+        {
+          "id": "4",
+          "name": "Test User",
+          "email": "test@gmail.com",
+          "status": "accepted",
+          "role": "owner",
+          "workingHoursStart": "09:00",
+          "workingHoursEnd": "20:00"
+        },
+        {
+          "id": "8",
+          "name": "June Bernhard",
+          "email": "Durward.Kris@gmail.com",
+          "status": "pending",
+          "role": "member",
+          "workingHoursStart": "08:00",
+          "workingHoursEnd": "18:00"
         }
       ]
     }

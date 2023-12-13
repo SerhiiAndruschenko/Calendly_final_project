@@ -3,10 +3,10 @@
     {
       "name": "Test User",
       "email": "test@gmail.com",
-      "password": "Test1234567891",
+      "password": "Test123456789",
       "id": "4",
-      "workingHoursStart": "09:00",
-      "workingHoursEnd": "20:00"
+      "workingHoursStart": "10:00",
+      "workingHoursEnd": "19:00"
     },
     {
       "name": "Robert Bergnaum",
@@ -47,6 +47,14 @@
       "id": "9",
       "workingHoursStart": "09:00",
       "workingHoursEnd": "19:00"
+    },
+    {
+      "name": "Test User 2",
+      "email": "test123@gmail.com",
+      "password": "Test123456789",
+      "id": "10",
+      "workingHoursStart": "08:00",
+      "workingHoursEnd": "18:00"
     }
   ]
 }

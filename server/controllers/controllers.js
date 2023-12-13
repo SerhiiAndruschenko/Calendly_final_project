@@ -48,8 +48,27 @@ async function updateItem(filePath, itemId, updatedItem, res, key) {
   }
 }
 
+// Retrieve an item from the file specified by filePath using the provided ID,
+async function getItem(filePath, itemId, res, key) {
+  try {
+    const data = await fileService.readFile(filePath);
+
+    const item = data[key].find((item) => item.id === itemId);
+
+    if (item) {
+      res.json(item);
+    } else {
+      res.status(404).send("Item not found");
+    }
+  } catch (error) {
+    console.error(`Error getting item from ${filePath}:`, error);
+    res.status(500).send("Internal Server Error");
+  }
+}
+
 module.exports = {
   getItems,
   addItem,
   updateItem,
+  getItem,
 };

@@ -31,10 +31,13 @@ import { usersList, eventsList, currentUser } from "../../store/selectors";
 import EventItem from "./EventItem";
 
 const Account = () => {
+  // Redux hooks
   const dispatch = useDispatch();
   const users = useSelector(usersList);
   const loggedInUser = useSelector(currentUser);
   const events = useSelector(eventsList);
+
+  // Local state
   const [userEvents, setUserEvents] = useState([]);
   const [openUserSettingsModal, setOpenUserSettingsModal] = useState(false);
   const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
@@ -43,12 +46,14 @@ const Account = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [cancelledEvents, setCancelledEvents] = useState([]);
 
+  // Function to handle editing an event
   const handleEditEvent = (eventID) => {
     const eventToEdit = userEvents.find((event) => event.id === eventID);
     setSelectedEvent(eventToEdit);
     handleOpenModal();
   };
 
+  // Functions to handle opening and closing the modal
   const handleOpenModal = () => {
     setOpenModal(true);
   };
@@ -57,31 +62,37 @@ const Account = () => {
     setOpenModal(false);
   };
 
+  // Function to close modal and show success alert
   const handleCloseModalSuccess = () => {
     setOpenModal(false);
     setOpenSuccessAlert(true);
   };
 
+  // Function to close the success alert
   const handleCloseAlert = () => {
     setOpenSuccessAlert(false);
   };
 
+  // Fetch users on component mount
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
 
+  // Fetch user ID and events when the logged-in user changes
   useEffect(() => {
     dispatch(UserActions.getUserId());
     dispatch(fetchEvents(loggedInUser.id));
     console.log(events);
   }, [loggedInUser.id]);
 
+  // Function to handle removing a user from an event
   const handleEventDelete = (eventID) => {
     dispatch(
       removeUserFromEvent({ eventId: eventID, userId: loggedInUser.id })
     );
   };
 
+  // Function to handle changing the status of an event
   const handleStatusChange = (eventID, status) => {
     dispatch(
       changeEventStatus({
@@ -92,16 +103,19 @@ const Account = () => {
     );
   };
 
+  // Function to handle user logout
   const handleLogOut = (event) => {
     event.preventDefault();
     dispatch(UserActions.logOut());
     navigate("/login");
   };
 
+  // Function to check if the current user is the only user
   const isFirstUser = () => {
     return users.length === 1;
   };
 
+  // Filter events to show only active events for the current user
   useEffect(() => {
     const filteredEvents = events.filter((event) => {
       const currentUserParticipant = event.participants.find(
@@ -114,6 +128,7 @@ const Account = () => {
     setUserEvents(filteredEvents);
   }, [events, loggedInUser]);
 
+  // Filter events to show only cancelled events for the current user
   useEffect(() => {
     const filteredEvents = events.filter((event) => {
       const currentUserParticipant = event.participants.find(
@@ -127,6 +142,7 @@ const Account = () => {
     setCancelledEvents(filteredEvents);
   }, [events, loggedInUser.id]);
 
+  // Function to get the status for the current user in a specific event
   const getStatusForCurrentUser = (event) => {
     const currentUserParticipant = event.participants.find(
       (participant) => participant.id === loggedInUser.id
@@ -136,6 +152,7 @@ const Account = () => {
       : "no status find";
   };
 
+  // Function to get the role of the current user in a specific event
   const getRoleOfUser = (event) => {
     const currentUserParticipant = event.participants.find(
       (participant) => participant.id === loggedInUser.id
@@ -145,6 +162,7 @@ const Account = () => {
       : "no status find";
   };
 
+  // Functions to handle opening and closing the user settings modal
   const handleOpenUserSettingsModal = () => {
     setOpenUserSettingsModal(true);
   };
@@ -153,6 +171,7 @@ const Account = () => {
     setOpenUserSettingsModal(false);
     setOpenSuccessAlert(true);
   };
+
   const handleCloseUserSettingsModal = () => {
     setOpenUserSettingsModal(false);
   };

@@ -16,10 +16,12 @@ function App() {
   const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
+    // Dispatch an action to get the token from local storage
     dispatch(UserActions.getToken());
   }, [dispatch]);
 
   useEffect(() => {
+    // Redirect to the login page if there is no token
     if (!token) {
       navigate("/login");
     }
@@ -28,12 +30,14 @@ function App() {
   useEffect(() => {
     let preloaderTimeout;
 
+    // Show preloader for 1 second, then hide it
     if (!loading) {
       preloaderTimeout = setTimeout(() => {
         setShowPreloader(false);
       }, 1000);
     }
 
+    // Cleanup timeout on component unmount
     return () => {
       clearTimeout(preloaderTimeout);
     };

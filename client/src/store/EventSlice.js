@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// Define the API endpoint for events
 const apiUrlEvents = "http://localhost:3001/events";
 
+// Async thunk to fetch events for a specific user
 export const fetchEvents = createAsyncThunk("events/fetchEvents", (userId) => {
   return axios.get(apiUrlEvents).then((response) => {
+    // Filter events based on user participation
     const filteredEvents = response.data.filter((event) =>
       event.participants.some((participant) => participant.id === userId)
     );
@@ -12,10 +15,12 @@ export const fetchEvents = createAsyncThunk("events/fetchEvents", (userId) => {
   });
 });
 
+// Async thunk to add a new event
 export const addNewEvent = createAsyncThunk("events/addEvent", (newEvent) =>
   axios.post(apiUrlEvents, newEvent).then((response) => response.data)
 );
 
+// Async thunk to remove a user from an event
 export const removeUserFromEvent = createAsyncThunk(
   "events/removeUserFromEvent",
   ({ eventId, userId }) => {
@@ -33,6 +38,7 @@ export const removeUserFromEvent = createAsyncThunk(
   }
 );
 
+// Async thunk to edit an event
 export const editEvent = createAsyncThunk(
   "events/editEvent",
   ({ eventId, updatedEvent }) =>
@@ -41,6 +47,7 @@ export const editEvent = createAsyncThunk(
       .then(() => ({ eventId, updatedEvent }))
 );
 
+// Async thunk to change the status of a user in an event
 export const changeEventStatus = createAsyncThunk(
   "events/changeEventStatus",
   ({ eventId, userId, status }) => {
@@ -64,6 +71,7 @@ export const changeEventStatus = createAsyncThunk(
   }
 );
 
+// Helper function to update event in state
 const updateEventInState = (state, eventId, updatedEvent) => {
   const updatedEvents = state.events.map((event) =>
     event.id === eventId ? { ...event, ...updatedEvent } : event
@@ -71,19 +79,23 @@ const updateEventInState = (state, eventId, updatedEvent) => {
   return updatedEvents;
 };
 
+// Initial state for the events slice
 export const initialState = {
   events: [],
   isLoading: false,
 };
 
+// Create the EventSlice using createSlice from Redux Toolkit
 const EventSlice = createSlice({
   name: "events",
   initialState,
   reducers: {
+    // Reducer to add an event to state
     addEvent: (state, action) => {
       state.events = [action.payload, ...state.events];
     },
   },
+  // Define extra reducers for handling async actions
   extraReducers: (builder) => {
     builder
       .addCase(fetchEvents.pending, (state) => {
@@ -126,5 +138,6 @@ const EventSlice = createSlice({
   },
 });
 
+// Export actions and reducer from the EventSlice
 export const EventActions = EventSlice.actions;
 export default EventSlice.reducer;

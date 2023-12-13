@@ -12,13 +12,16 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs from "dayjs";
 
+// Fetch user data when the component mounts
 const EditUserForm = ({ onCloseModal }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector(currentUser);
+
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
 
+  // Validation schema for formik
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Email is not valid")
@@ -34,6 +37,7 @@ const EditUserForm = ({ onCloseModal }) => {
     workingHoursEnd: Yup.string().required("This field is required"),
   });
 
+  // Formik hook for form handling
   const formik = useFormik({
     initialValues: {
       email: loggedInUser.email,
@@ -47,14 +51,14 @@ const EditUserForm = ({ onCloseModal }) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      // Merge the existing user data with the updated form values
       const updatedUser = { ...loggedInUser, ...values };
-      console.log(values);
-      console.log(updatedUser);
       dispatch(updateUser(updatedUser));
       onCloseModal();
     },
   });
 
+  // Effect to update form fields when user data changes
   useEffect(() => {
     formik.setFieldValue("workingHoursStart", loggedInUser.workingHoursStart);
     formik.setFieldValue("workingHoursEnd", loggedInUser.workingHoursEnd);
@@ -63,6 +67,7 @@ const EditUserForm = ({ onCloseModal }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
+        {/* Email Input */}
         <TextField
           id="email"
           name="email"
@@ -78,6 +83,7 @@ const EditUserForm = ({ onCloseModal }) => {
       </div>
 
       <div>
+        {/* Password Input */}
         <TextField
           id="password"
           name="password"
@@ -91,7 +97,9 @@ const EditUserForm = ({ onCloseModal }) => {
           helperText={formik.touched.password && formik.errors.password}
         />
       </div>
+
       <div className="hours-row">
+        {/* Working Hours Start and End Time Pickers */}
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["TimePicker"]}>
             <TimePicker
@@ -145,6 +153,7 @@ const EditUserForm = ({ onCloseModal }) => {
       <br />
       <br />
       <div>
+        {/* Submit Button */}
         <Button
           fullWidth
           variant="contained"

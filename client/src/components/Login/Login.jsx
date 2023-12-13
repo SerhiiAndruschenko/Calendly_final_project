@@ -13,10 +13,12 @@ const Login = () => {
   const token = useSelector(currentToken);
 
   useEffect(() => {
+    // Dispatch an action to get the token from local storage
     dispatch(UserActions.getToken());
   }, [dispatch]);
 
   useEffect(() => {
+    // If a token exists, navigate to the root path
     if (token) {
       navigate("/");
     }
@@ -25,6 +27,7 @@ const Login = () => {
   const [signUpVisibility, setSignUpVisibility] = useState(false);
 
   const handleSignUpVisibility = () => {
+    // Toggle the visibility of the SignUp component
     return setSignUpVisibility(!signUpVisibility);
   };
 

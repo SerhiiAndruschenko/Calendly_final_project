@@ -1,5 +1,6 @@
 const fileService = require("./fileService");
 
+// Retrieve items from the file specified by filePath using the provided key,
 async function getItems(filePath, res, key) {
   try {
     const data = await fileService.readFile(filePath);
@@ -10,6 +11,7 @@ async function getItems(filePath, res, key) {
   }
 }
 
+// Add a new item to the file specified by filePath.
 async function addItem(filePath, newItem, res, key) {
   try {
     const data = await fileService.readFile(filePath);
@@ -24,6 +26,7 @@ async function addItem(filePath, newItem, res, key) {
   }
 }
 
+// Update an existing item in the file specified by filePath.
 async function updateItem(filePath, itemId, updatedItem, res, key) {
   try {
     const data = await fileService.readFile(filePath);

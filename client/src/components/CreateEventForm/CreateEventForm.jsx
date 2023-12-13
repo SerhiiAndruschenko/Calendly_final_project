@@ -24,6 +24,7 @@ import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import { useState, useEffect } from "react";
 import { editEvent } from "../../store/EventSlice";
 
+// Validation schema for formik
 const validationSchema = Yup.object({
   eventName: Yup.string()
     .required("This field is required")
@@ -37,26 +38,34 @@ const validationSchema = Yup.object({
 });
 
 const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
+  // Redux hooks
   const users = useSelector(usersList);
   const dispatch = useDispatch();
   const currentUserInfo = useSelector(currentUser) || {};
+  const events = useSelector(eventsList);
+  
+  // Local state
   const [individual, setIndividual] = useState(false);
   const [minTime, setMinTime] = useState(null);
   const [maxTime, setMaxTime] = useState(null);
-  const events = useSelector(eventsList);
   const [userEvents, setUserEvents] = useState([]);
 
+  // Function to handle toggling between individual and group event
   const handleMultiply = () => {
     setIndividual(!individual);
   };
+
+  // Filter out the current user from the list of users
   const filteredUsers = users.filter((user) => user.id !== currentUserInfo.id);
 
+  // Filter out the current user from the list of participants in the selected event
   const filteredParticipants = selectedEvent
     ? selectedEvent.participants.filter(
         (participant) => participant.id !== currentUserInfo.id
       )
     : null;
 
+  // Function to get selected users based on individual/group selection
   const getSelectedUsers = () => {
     const filtered = filteredUsers.filter((user) =>
       filteredParticipants.some((participant) => participant.id === user.id)
@@ -64,6 +73,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
     return individual ? filtered[0] : filtered;
   };
 
+  // Formik hook for form handling
   const formik = useFormik({
     initialValues: {
       eventName: selectedEvent?.eventName || "",
@@ -77,6 +87,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
     },
     validationSchema,
     onSubmit: async (values) => {
+      // Generate a unique ID for the new event
       const maxId = Math.max(...events.map((event) => parseInt(event.id))) || 0;
       const id = (maxId + 1).toString();
       const formattedDate = values.date.format("MM/DD/YYYY");
@@ -85,6 +96,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
         ? values.selectedUsers
         : [values.selectedUsers];
 
+      // Prepare participants for the event
       const participants = selectedUsers.map((user) => ({
         id: user.id,
         name: user.name,
@@ -95,6 +107,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
         workingHoursEnd: user.workingHoursEnd,
       }));
 
+      // Add the current user as the owner if not already in the participants list
       if (!participants.some((user) => user.id === currentUserInfo.id)) {
         participants.unshift({
           id: currentUserInfo.id,
@@ -107,6 +120,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
         });
       }
 
+      // Prepare event data
       const eventData = {
         id: id,
         eventName: values.eventName,
@@ -117,6 +131,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
         participants,
       };
 
+      // Dispatch action to add or edit the event
       selectedEvent
         ? dispatch(
             editEvent({ eventId: selectedEvent.id, updatedEvent: eventData })
@@ -126,6 +141,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
     },
   });
 
+  // Effect to update state when individual/group selection changes
   useEffect(() => {
     formik.setFieldValue("individualCall", individual);
     if (individual && formik.values.selectedUsers.length > 0) {
@@ -134,23 +150,25 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
     }
   }, [individual]);
 
+  // Effect to set individual/group based on selected event
   useEffect(() => {
     setIndividual(selectedEvent?.individualCall || false);
   }, [selectedEvent]);
 
+  // Handle change in selected users for the event
   const handleSelectChange = (event) => {
     const selectedUsers = !individual
       ? event.target.value
       : [event.target.value];
     formik.setFieldValue("selectedUsers", selectedUsers);
 
+    // Update user events and min/max time based on selected users
     if (individual && selectedUsers.length > 0) {
       const selectedUserEvents = events.filter((event) =>
         event.participants.some(
           (participant) => participant.id === selectedUsers[0].id
         )
       );
-
       setUserEvents(selectedUserEvents);
     } else {
       setUserEvents([]);
@@ -164,6 +182,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
       : setMaxTime(null);
   };
 
+  // Generate disabled times based on existing user events
   const generateDisabledTimes = () => {
     const disabledTimes = [];
 
@@ -184,6 +203,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
     return disabledTimes;
   };
 
+  // Check if a time should be disabled
   const shouldDisableTime = (value, view) => {
     return generateDisabledTimes().some((disabledTime) =>
       value.isBetween(disabledTime.start, disabledTime.end, null, "[]")
@@ -195,6 +215,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
       <form onSubmit={formik.handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
+            {/* Event Name */}
             <TextField
               fullWidth
               id="eventName"
@@ -209,6 +230,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
             />
           </Grid>
           <Grid item xs={12}>
+            {/* Event Description */}
             <TextField
               fullWidth
               id="description"
@@ -227,6 +249,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
             />
           </Grid>
           <Grid item xs={12}>
+            {/* Individual/Group Call Checkbox and User Selection */}
             <FormControlLabel
               control={
                 <Checkbox
@@ -265,6 +288,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
             </FormControl>
           </Grid>
           <Grid item xs={6}>
+            {/* Date Picker */}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["DatePicker"]}>
                 <DatePicker
@@ -280,6 +304,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
             </LocalizationProvider>
           </Grid>
           <Grid item xs={6}>
+            {/* Time Picker */}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={["TimePicker"]}>
                 <TimePicker
@@ -301,6 +326,7 @@ const CreateEventForm = ({ onCloseModalSuccess, selectedEvent }) => {
             </LocalizationProvider>
           </Grid>
         </Grid>
+        {/* Submit Button */}
         <Box mt={2}>
           <Button type="submit" fullWidth variant="contained" color="primary">
             {selectedEvent ? "Update Event" : "Create Event"}

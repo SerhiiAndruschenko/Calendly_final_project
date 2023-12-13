@@ -2,16 +2,20 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { LOCAL_STORAGE_NAME } from "../common/constants";
 import axios from "axios";
 
+// Define the API endpoint for users
 const apiUrlUsers = "http://localhost:3001/users";
 
+// Async thunk to fetch users
 export const fetchUsers = createAsyncThunk("users/fetchUsers", () =>
   axios.get(apiUrlUsers).then((response) => response.data)
 );
 
+// Async thunk to add a new user
 export const addUser = createAsyncThunk("users/addUser", (newUser) =>
   axios.post(apiUrlUsers, newUser).then((response) => response.data)
 );
 
+// Async thunk to update a user
 export const updateUser = createAsyncThunk(
   "users/updateUser",
   async (updatedUser) => {
@@ -23,29 +27,35 @@ export const updateUser = createAsyncThunk(
   }
 );
 
+// Initial state for the users slice
 export const initialState = {
   users: [],
   user: {},
   token: null,
 };
 
+// Create the UserSlice using createSlice from Redux Toolkit
 const UserSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    // Reducer to log in a user
     logIn: (state, action) => {
       let encodedToken = btoa(JSON.stringify(action.payload));
       state.token = encodedToken;
       localStorage.setItem(LOCAL_STORAGE_NAME.TOKEN, encodedToken);
     },
+    // Reducer to log out a user
     logOut: (state) => {
       state.token = null;
       state.user = {};
       localStorage.removeItem(LOCAL_STORAGE_NAME.TOKEN);
     },
+    // Reducer to get the token from local storage
     getToken: (state) => {
       state.token = localStorage.getItem(LOCAL_STORAGE_NAME.TOKEN);
     },
+    // Reducer to get the user ID from local storage
     getUserId: (state) => {
       const storedToken = localStorage.getItem(LOCAL_STORAGE_NAME.TOKEN);
       if (storedToken) {
@@ -57,6 +67,7 @@ const UserSlice = createSlice({
       }
     },
   },
+  // Define extra reducers for handling async actions
   extraReducers: (builder) => {
     builder
       .addCase(fetchUsers.fulfilled, (state, action) => {
@@ -78,5 +89,6 @@ const UserSlice = createSlice({
   },
 });
 
+// Export actions and reducer from the UserSlice
 export const UserActions = UserSlice.actions;
 export default UserSlice.reducer;
